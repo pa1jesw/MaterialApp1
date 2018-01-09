@@ -4,41 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/windowBackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.pa1.materialapp1.MainActivity"
     tools:showIn="@layout/activity_main">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ivPic"
+        android:layout_width="196dp"
+        android:layout_height="196dp"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="98dp"
+        android:src="@drawable/ic_launcher_background"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="96dp"
-        android:layout_marginEnd="49dp"
+        android:layout_above="@+id/btnTakePicture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
         android:fontFamily="cursive"
-        android:text="Press this button for trigger"
+        android:text="Press these buttons for trigger"
         android:textSize="25dp" />
 
-    <EditText
-        android:id="@+id/etText"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnTakePicture"
+        android:layout_width="wrap_content"
+        android:background="@drawable/buttonstyle"
+        android:fontFamily="cursive"
+        android:textStyle="italic|bold"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="59dp"
-        android:ems="10"
-        android:hint="Enter Anything Here"
-        android:inputType="textPersonName" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="83dp"
+        android:text="Take Picture" />
 
-    <ListView
-        android:id="@+id/lvLocales"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etText"
-        android:layout_marginTop="51dp"
-        android:visibility="visible"
-        android:scrollbars="vertical" />
 
 </RelativeLayout>
