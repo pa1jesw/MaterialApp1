@@ -1,5 +1,6 @@
 package com.pa1.materialapp1;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +28,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,6 +61,32 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ivPic = findViewById(R.id.ivPic);
         btnTakePicture = findViewById(R.id.btnTakePicture);
+
+
+
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        Toast.makeText(MainActivity.this, "Enjoy Camera", Toast.LENGTH_SHORT).show();
+                        btnTakePicture.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        // check for permanent denial of permission
+                        Toast.makeText(MainActivity.this, "Allow Camera Permissions", Toast.LENGTH_SHORT).show();
+                        btnTakePicture.setEnabled(false);
+                        if (response.isPermanentlyDenied()) {
+                            btnTakePicture.setEnabled(false);
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
 
 
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -146,4 +180,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
